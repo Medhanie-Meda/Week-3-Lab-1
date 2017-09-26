@@ -32,15 +32,13 @@ public class LoginServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        User user = new User();
+       String userName = request.getParameter("uName");
+       String password = request.getParameter("pass");
        
-        String userName = user.getUsername();
-        String password = user.getUsername();
-        request.setAttribute("uName", userName);
-        request.setAttribute("pass", password);
-        
-        UserService us = new UserService();
-        
+       User user = new User(userName, password);
+       
+        request.setAttribute("user", user);
+        UserService us = new UserService();        
        
         if(userName == null || userName.trim().isEmpty() || password == null || password.trim().isEmpty()) 
         {            
